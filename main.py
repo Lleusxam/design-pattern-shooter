@@ -1,6 +1,6 @@
 import pygame
 import sys
-from config import SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND_COLOR, PLAYER_COLOR, PLAYER_SIZE
+from config import SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND_COLOR, PLAYER_COLOR, PLAYER_SIZE, PLAYER_SPEED
 
 # Pygame Start
 pygame.init()
@@ -20,6 +20,17 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+    # Keyboard
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_w]:
+        player_pos[1] -= PLAYER_SPEED
+    if keys[pygame.K_s]:
+        player_pos[1] += PLAYER_SPEED
+    if keys[pygame.K_a]:
+        player_pos[0] -= PLAYER_SPEED
+    if keys[pygame.K_d]:
+        player_pos[0] += PLAYER_SPEED
 
     # Draw player
     pygame.draw.rect(screen, PLAYER_COLOR, (player_pos[0], player_pos[1], PLAYER_SIZE, PLAYER_SIZE))
