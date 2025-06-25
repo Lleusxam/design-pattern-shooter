@@ -54,3 +54,21 @@ class Weapon:
     
     def set_shooting_strategy(self, shooting_strategy):
         self.shooting_strategy = shooting_strategy
+
+class Handgun(Weapon):
+    def __init__(self, bullet_type):
+        super().__init__(bullet_type, SingleShot())
+        self.name = "Handgun"
+        self.damage = 10
+
+class Shotgun(Weapon):
+    def __init__(self, bullet_type):
+        super().__init__(bullet_type, MultiShot())
+        self.name = "Shotgun"
+        self.damage = 8
+
+class MachineGun(Weapon):
+    def __init__(self, bullet_type):
+        super().__init__(bullet_type, RapidShot())
+        self.name = "MachineGun"
+        self.damage = 5
