@@ -20,6 +20,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        player.handle_event(event)
     
     player.handle_input()
     player.draw(screen)
