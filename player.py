@@ -41,6 +41,14 @@ class Player:
                 self.switch_weapon(1)
             if event.key == pygame.K_3:
                 self.switch_weapon(2)
+            if event.key == pygame.K_q:
+                self.change_bullet_type("normal")
+            if event.key == pygame.K_e:
+                self.change_bullet_type("fire")
+            if event.key == pygame.K_r:
+                self.change_bullet_type("electric")
+            if event.key == pygame.K_t:
+                self.change_bullet_type("explosive")
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:  # Left mouse button
                 self.shoot(bullets)
@@ -59,6 +67,23 @@ class Player:
             dist = 1  # Prevent division by zero
         direction = (dx / dist, dy / dist)
         self.current_weapon.shoot(direction, bullets)
+    
+    def change_bullet_type(self, bullet_type_name):
+        from weapon import NormalBullet, FireBullet, ElectricBullet, ExplosiveBullet
+
+        if bullet_type_name == "normal":
+            new_bullet = NormalBullet()
+        elif bullet_type_name == "fire":
+            new_bullet = FireBullet()
+        elif bullet_type_name == "electric":
+            new_bullet = ElectricBullet()
+        elif bullet_type_name == "explosive":
+            new_bullet = ExplosiveBullet()
+        else:
+            return  # Unknown type
+
+        self.current_weapon.set_bullet_type(new_bullet)
+        print(f"Current bullet type: {bullet_type_name.capitalize()}")
 
     def draw(self, screen):
         pygame.draw.rect(screen, PLAYER_COLOR, (self.x, self.y, PLAYER_SIZE, PLAYER_SIZE))
