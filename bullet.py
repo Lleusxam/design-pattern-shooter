@@ -1,5 +1,5 @@
 import pygame
-from config import RED_ORANGE, PURPLE, WHITE
+from config import RED_ORANGE, PURPLE, DEEP_BLUE, WHITE
 
 class Bullet:
     def __init__(self, x, y, direction, bullet_type):
@@ -24,5 +24,7 @@ class Bullet:
             return RED_ORANGE
         elif self.bullet_type.__class__.__name__ == "ElectricBullet":
             return PURPLE
+        elif self.bullet_type.__class__.__name__ == "ExplosiveBullet":
+            return DEEP_BLUE
         else:
             return WHITE 
