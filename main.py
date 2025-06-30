@@ -1,20 +1,22 @@
 import pygame
 import sys
+from typing import List
 from config import SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND_COLOR
 from player import Player
+from bullet import Bullet
 
 # Pygame setup
 pygame.init()
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen: pygame.Surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Modular Weapons Game")
-clock = pygame.time.Clock()
+clock: pygame.time.Clock = pygame.time.Clock()
 
 # Player and bullets
-player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
-bullets = []
+player: Player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+bullets: List[Bullet] = []
 
 # Main loop
-running = True
+running: bool = True
 while running:
     screen.fill(BACKGROUND_COLOR)
 

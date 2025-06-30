@@ -1,23 +1,28 @@
 import pygame
+from typing import Tuple, TYPE_CHECKING
 from config import RED_ORANGE, PURPLE, DEEP_BLUE, WHITE
 
-class Bullet:
-    def __init__(self, x, y, direction, bullet_type):
-        self.x = x
-        self.y = y
-        self.direction = direction  # Vector (dx, dy)
-        self.speed = 10
-        self.bullet_type = bullet_type
-        self.radius = 5
+if TYPE_CHECKING: # To avoid circular import
+    from weapon import BulletType
 
-    def update(self):
+class Bullet:
+    def __init__(self, x: float, y: float, direction: Tuple[float, float], bullet_type: "BulletType"):
+        self.x: float = x
+        self.y: float = y
+        self.direction: Tuple[float, float] = direction  # Vector (dx, dy)
+        self.speed: float = 10
+        self.bullet_type: "BulletType" = bullet_type
+        self.radius: int = 5
+
+    def update(self) -> None:
         self.x += self.direction[0] * self.speed
         self.y += self.direction[1] * self.speed
 
-    def draw(self, screen):
-        color = self.get_color()
+    def draw(self, screen: pygame.Surface) -> None:
+        color: Tuple[int, int, int] = self.get_color()
         pygame.draw.circle(screen, color, (int(self.x), int(self.y)), self.radius)
-    def get_color(self):
+
+    def get_color(self) -> Tuple[int, int, int]:
         if self.bullet_type.__class__.__name__ == "NormalBullet":
             return WHITE
         elif self.bullet_type.__class__.__name__ == "FireBullet":
@@ -27,4 +32,4 @@ class Bullet:
         elif self.bullet_type.__class__.__name__ == "ExplosiveBullet":
             return DEEP_BLUE
         else:
-            return WHITE 
+            return WHITE
